@@ -3,24 +3,26 @@ on: push
 
 jobs:
   upload-artifact:
-  runs-on: ubuntu-latest
-  steps:
-  - name: echo
-    run: echo hello-world > hello.txt
-  - name: upload artifact
-    uses: actions/upload-artifact@v3
-    with:
-      name: artfact-test
-      pathes: ./hello.txt
+    runs-on: ubuntu-latest
+    steps:
+      - name: create file
+        run: echo "hello-world" > hello.txt
+
+      - name: upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: artifact-test
+          path: hello.txt   # ← path (단수)
 
   download-artifact:
     runs-on: ubuntu-latest
     needs: upload-artifact
     steps:
-    - name: download artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: artfact-test
-        path: ./
-    - name: checkout
-      run: cat hello.txt
+      - name: download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: artifact-test
+          path: .           # 현재 디렉터리에 받기
+
+      - name: show file
+        run: cat hello.txt
