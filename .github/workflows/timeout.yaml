@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 2
     steps:
-      -name: loop
+      - name: loop
       run: |
         count = 0
         while true; dp
@@ -15,5 +15,5 @@ jobs:
           sleep1
         done
 
-      -name: echo
+      - name: echo
       run: echo hello
